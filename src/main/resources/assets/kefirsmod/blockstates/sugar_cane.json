@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/sugar_cane"
+      "model": "kefirsmod:block/sugar_cane"
     }
   }
 }

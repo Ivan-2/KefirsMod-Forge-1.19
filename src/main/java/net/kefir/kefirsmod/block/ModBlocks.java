@@ -1,9 +1,7 @@
 package net.kefir.kefirsmod.block;
 
 import net.kefir.kefirsmod.KefirsMod;
-import net.kefir.kefirsmod.block.custom.BlueBerryBushBlock;
-import net.kefir.kefirsmod.block.custom.ModFlammableRotatedPillarBlock;
-import net.kefir.kefirsmod.block.custom.RosehipBushBlock;
+import net.kefir.kefirsmod.block.custom.*;
 import net.kefir.kefirsmod.item.ModItems;
 import net.kefir.kefirsmod.worldgen.feature.tree.BeechTreeGrower;
 import net.minecraft.core.BlockPos;
@@ -35,9 +33,16 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLUEBERRY_BUSH = BLOCKS.register("blueberry_bush",
             ()-> new BlueBerryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
     public static final RegistryObject<Block> BLACKBERRY_BUSH = BLOCKS.register("blackberry_bush",
-            ()-> new BlueBerryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
+            ()-> new BlackBerryBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
     public static final RegistryObject<Block> ROSEHIP_BUSH = BLOCKS.register("rosehip_bush",
             ()-> new RosehipBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
+
+    public static final RegistryObject<Block> YUCCA = registerBlock("yucca",
+            ()-> new SpikyBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)), CreativeModeTab.TAB_DECORATIONS);
+
+    public static final RegistryObject<Block> SAGEBRUSH = registerBlock("sagebrush",
+            ()-> new NotSpikyBushBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)), CreativeModeTab.TAB_DECORATIONS);
+
 
 
 
