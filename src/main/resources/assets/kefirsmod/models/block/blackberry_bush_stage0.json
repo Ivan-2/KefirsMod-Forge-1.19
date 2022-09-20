@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "kefirsmod:block/blackberry_bush_stage0"
+  }
+}

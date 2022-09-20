@@ -1,0 +1,20 @@
+{
+  "item.kefirsmod.bronze": "Bronze Ingot",
+  "block.kefirsmod.bronze_block": "Bronze Block",
+
+
+  "item.kefirsmod.blueberry": "Blueberry",
+  "item.minecraft.sweet_berries": "Lingonberry",
+  "item.kefirsmod.blackberry": "Blackberry",
+
+  "block.kefirsmod.beech_log": "Beech Log",
+  "block.kefirsmod.beech_wood": "Beech Wood",
+  "block.kefirsmod.stripped_beech_log": "Stripped Beech Log",
+  "block.kefirsmod.stripped_beech_wood": "Stripped Beech Wood",
+  "block.kefirsmod.beech_planks": "Beech Planks",
+  "block.kefirsmod.beech_door": "Beech Door",
+  "block.kefirsmod.beech_trapdoor": "Beech Trapdoor",
+  "block.kefirsmod.beech_pressure_plate": "Beech Pressure Plate",
+  "block.kefirsmod.beech_sapling": "Beech Sapling",
+  "block.kefirsmod.beech_leaves": "Beech Leaves"
+}

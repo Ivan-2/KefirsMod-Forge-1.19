@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "kefirsmod:block/beech_log",
+    "side": "kefirsmod:block/beech_log"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kefirsmod:bronze_block"
+    }
+  ],
+  "result": {
+    "item": "kefirsmod:bronze",
+    "count": 9
+  }
+}

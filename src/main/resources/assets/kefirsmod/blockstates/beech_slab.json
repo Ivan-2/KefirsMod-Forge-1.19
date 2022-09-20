@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "kefirsmod:block/beech_slab"
+    },
+    "type=double": {
+      "model": "kefirsmod:block/beech_planks"
+    },
+    "type=top": {
+      "model": "kefirsmod:block/beech_slab_top"
+    }
+  }
+}
