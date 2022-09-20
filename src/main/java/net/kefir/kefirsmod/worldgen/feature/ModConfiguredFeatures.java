@@ -39,7 +39,7 @@ public class ModConfiguredFeatures {
     public static final Holder<PlacedFeature> BEECH_CHECKED = PlacementUtils.register("beech_checked", BEECH_TREE,
             PlacementUtils.filteredByBlockSurvival(ModBlocks.BEECH_SAPLING.get()));
 
-    public static final Holder<PlacedFeature> FANCY_BEECH_CHECKED = PlacementUtils.register("beech_checked", FANCY_BEECH_TREE,
+    public static final Holder<PlacedFeature> FANCY_BEECH_CHECKED = PlacementUtils.register("fancy_beech_checked", FANCY_BEECH_TREE,
             PlacementUtils.filteredByBlockSurvival(ModBlocks.BEECH_SAPLING.get()));
 
 
