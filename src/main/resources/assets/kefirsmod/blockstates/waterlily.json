@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "kefirsmod:block/waterlily"
+      },
+      {
+        "model": "kefirsmod:block/waterlily",
+        "y": 90
+      },
+      {
+        "model": "kefirsmod:block/waterlily",
+        "y": 180
+      },
+      {
+        "model": "kefirsmod:block/waterlily",
+        "y": 270
+      }
+    ]
+  }
+}

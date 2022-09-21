@@ -13,6 +13,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,7 +22,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-import static net.minecraft.world.level.block.Blocks.FLOWER_POT;
+import static net.minecraft.world.level.block.Blocks.*;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
@@ -43,9 +44,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> SAGEBRUSH = registerBlock("sagebrush",
             ()-> new NotSpikyBushBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)), CreativeModeTab.TAB_DECORATIONS);
 
+    public static final RegistryObject<Block> WATERLILY = registerBlock("waterlily",
+            ()-> new WaterlilyBlock(BlockBehaviour.Properties.copy(LILY_PAD)), CreativeModeTab.TAB_DECORATIONS);
 
 
 
+
+    //beech
     public static final RegistryObject<Block> BEECH_LOG = registerBlock("beech_log",
             ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)), CreativeModeTab.TAB_BUILDING_BLOCKS);
     public static final RegistryObject<Block> BEECH_WOOD = registerBlock("beech_wood",
@@ -55,35 +60,77 @@ public class ModBlocks {
     public static final RegistryObject<Block> STRIPPED_BEECH_WOOD = registerBlock("stripped_beech_wood",
             ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
-
     public static final RegistryObject<Block> BEECH_PLANKS = registerBlock("beech_planks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)) {
+            () -> new Block(BlockBehaviour.Properties.copy(OAK_PLANKS)) {
                 @Override
                 public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
                     return true;
                 }
-
                 @Override
                 public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
                     return 20;
                 }
-
                 @Override
                 public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
                     return 5;
                 }
             }, CreativeModeTab.TAB_BUILDING_BLOCKS);
 
+    public static final RegistryObject<Block> BEECH_STAIRS = registerBlock("beech_stairs",
+            () ->  new StairBlock(OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.copy(OAK_STAIRS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 20;
+                }
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 5;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> BEECH_SLAB = registerBlock("beech_slab",
+            () ->  new SlabBlock(BlockBehaviour.Properties.copy(OAK_SLAB)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 20;
+                }
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 5;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    //to be done
+    public static final RegistryObject<Block> BEECH_SIGN = registerBlock("beech_sign",
+            () -> new StandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), WoodType.OAK), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    //public static final RegistryObject<Block> BEECH_WALL_SIGN = registerBlock("beech_wall_sign",
+    //        () -> new WallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), WoodType.OAK), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> BEECH_FENCE = registerBlock("beech_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(OAK_FENCE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BEECH_FENCE_GATE = registerBlock("beech_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(OAK_FENCE_GATE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+
     public static final RegistryObject<Block> BEECH_DOOR = registerBlock("beech_door",
             () -> new DoorBlock(BlockBehaviour.Properties.of(Material.WOOD)
                     .strength(5f).requiresCorrectToolForDrops()), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
     public static final RegistryObject<Block> BEECH_TRAPDOOR = registerBlock("beech_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.of(Material.WOOD)
                     .strength(5f).requiresCorrectToolForDrops()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     public static final RegistryObject<Block> BEECH_PRESSURE_PLATE = registerBlock("beech_pressure_plate",
             ()-> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of(Material.WOOD).noCollission().strength(0.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_REDSTONE);
+    public static final RegistryObject<Block> BEECH_BUTTON = registerBlock("beech_button",
+            ()-> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), CreativeModeTab.TAB_REDSTONE);
 
 
     public static final RegistryObject<Block> BEECH_LEAVES = registerBlock("beech_leaves",

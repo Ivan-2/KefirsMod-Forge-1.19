@@ -6,6 +6,10 @@
   "item.kefirsmod.blueberry": "Blueberry",
   "item.minecraft.sweet_berries": "Lingonberry",
   "item.kefirsmod.blackberry": "Blackberry",
+  "item.kefirsmod.rosehip": "Rosehip",
+  "block.kefirsmod.yucca": "Yucca",
+  "block.kefirsmod.sagebrush": "Sagebrush",
+  "block.kefirsmod.waterlily": "Waterlily",
 
   "block.kefirsmod.beech_log": "Beech Log",
   "block.kefirsmod.beech_wood": "Beech Wood",
@@ -14,7 +18,14 @@
   "block.kefirsmod.beech_planks": "Beech Planks",
   "block.kefirsmod.beech_door": "Beech Door",
   "block.kefirsmod.beech_trapdoor": "Beech Trapdoor",
+  "block.kefirsmod.beech_fence": "Beech Fence",
+  "block.kefirsmod.beech_fence_gate": "Beech Gate",
+  "block.kefirsmod.beech_stairs": "Beech Stairs",
+  "block.kefirsmod.beech_slab": "Beech Slab",
+  "block.kefirsmod.beech_sign": "Beech Sign",
+  "block.kefirsmod.beech_wall_sign": "Beech Wall Sign",
   "block.kefirsmod.beech_pressure_plate": "Beech Pressure Plate",
+  "block.kefirsmod.beech_button": "Beech Button",
   "block.kefirsmod.beech_sapling": "Beech Sapling",
   "block.kefirsmod.beech_leaves": "Beech Leaves"
 }
