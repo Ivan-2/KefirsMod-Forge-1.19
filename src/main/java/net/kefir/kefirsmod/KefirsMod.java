@@ -3,10 +3,21 @@ package net.kefir.kefirsmod;
 import com.mojang.logging.LogUtils;
 import net.kefir.kefirsmod.block.ModBlocks;
 import net.kefir.kefirsmod.item.ModItems;
+import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.level.ColorResolver;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -73,9 +84,9 @@ public class KefirsMod
     }
 
     @net.minecraftforge.fml.common.Mod.EventBusSubscriber(value = Dist.CLIENT, modid = KefirsMod.MOD_ID, bus = net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus.MOD)
-    private static class ClientHandler
+    public static class ClientHandler
     {
-        private static final ColorResolver COLOR_RESOLVER = (biome, x, z) -> biome.getFoliageColor();
+        public static final ColorResolver COLOR_RESOLVER = (biome, x, z) -> biome.getFoliageColor();
 
         @SubscribeEvent
         static void registerColorResolver(RegisterColorHandlersEvent.ColorResolvers event)
@@ -89,6 +100,14 @@ public class KefirsMod
             event.register(((state, btGetter, pos, tintIndex)
                     -> btGetter == null || pos == null ? 0 : btGetter.getBlockTint(pos, COLOR_RESOLVER)),
                     ModBlocks.BEECH_LEAVES.get());
+        }
+        @SubscribeEvent
+        static void registerItemColor(RegisterColorHandlersEvent.Item event)
+        {
+            event.register((itemColor, item) -> {
+                BlockState blockstate = ((BlockItem)itemColor.getItem()).getBlock().defaultBlockState();
+                return FoliageColor.getDefaultColor();
+            }, ModBlocks.BEECH_LEAVES.get());
         }
     }
 }
