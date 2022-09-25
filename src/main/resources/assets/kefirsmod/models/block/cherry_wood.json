@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "kefirsmod:block/cherry_log",
+    "side": "kefirsmod:block/cherry_log"
+  }
+}

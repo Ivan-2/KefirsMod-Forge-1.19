@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "kefirsmod:block/cherry_slab"
+    },
+    "type=double": {
+      "model": "kefirsmod:block/cherry_planks"
+    },
+    "type=top": {
+      "model": "kefirsmod:block/cherry_slab_top"
+    }
+  }
+}

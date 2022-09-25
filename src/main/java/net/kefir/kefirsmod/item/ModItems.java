@@ -31,7 +31,12 @@ public class ModItems {
     public static final RegistryObject<Item> ROSEHIP = ITEMS.register("rosehip",
             ()-> new ItemNameBlockItem(ModBlocks.ROSEHIP_BUSH.get(),
                     new Item.Properties().tab(CreativeModeTab.TAB_FOOD)
-                            .food(new FoodProperties.Builder().nutrition(1).saturationMod(5f).build())));
+                            .food(new FoodProperties.Builder().nutrition(1).saturationMod(3f).build())));
+
+    public static final RegistryObject<Item> CHERRIES = ITEMS.register("cherries",
+            ()-> new Item( new Item.Properties().tab(CreativeModeTab.TAB_FOOD)
+                            .food(new FoodProperties.Builder().nutrition(2).saturationMod(1f).build())));
+
 
 
     public static void register(IEventBus eventBus) {

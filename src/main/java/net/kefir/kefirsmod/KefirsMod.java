@@ -111,13 +111,15 @@ public class KefirsMod
                 BlockState blockstate = ((BlockItem)itemColor.getItem()).getBlock().defaultBlockState();
                 return FoliageColor.getDefaultColor();
             },
-                    ModBlocks.BEECH_LEAVES.get());
+                    ModBlocks.BEECH_LEAVES.get()
+            );
 
             event.register((itemColor, item) -> {
                 BlockState blockstate = ((BlockItem)itemColor.getItem()).getBlock().defaultBlockState();
-                return FoliageColor.getDefaultColor();
+                return FoliageColor.get(0.5D, 1.0D);
             },
-                    ModBlocks.WATERLILY.get());
+                    ModBlocks.WATERLILY.get()
+            );
         }
     }
 }

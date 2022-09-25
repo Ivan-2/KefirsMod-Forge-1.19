@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
@@ -43,8 +44,21 @@ public class ModConfiguredFeatures {
             PlacementUtils.filteredByBlockSurvival(ModBlocks.BEECH_SAPLING.get()));
 
 
+
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> CHERRY_TREE =
+            FeatureUtils.register("beech", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                    BlockStateProvider.simple(ModBlocks.CHERRY_LOG.get()),
+                    new StraightTrunkPlacer(6, 2, 2),
+                    BlockStateProvider.simple(ModBlocks.CHERRY_BLOSSOM.get()),
+                    new BlobFoliagePlacer(ConstantInt.of(4), ConstantInt.of(2), 3),
+                    new TwoLayersFeatureSize(1, 1, 2)).build());
+
     public static final Holder<ConfiguredFeature<RandomFeatureConfiguration, ?>> BEECH_SPAWN =
             FeatureUtils.register("beech_spawn", Feature.RANDOM_SELECTOR,
                     new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(BEECH_CHECKED,
-                            0.5F)), FANCY_BEECH_CHECKED));
+                            5F)), FANCY_BEECH_CHECKED));
+    public static final Holder<ConfiguredFeature<RandomFeatureConfiguration, ?>> CHERRY_SPAWM =
+            FeatureUtils.register("beech_spawn", Feature.RANDOM_SELECTOR,
+                    new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(BEECH_CHECKED,
+                            5F)), FANCY_BEECH_CHECKED));
 }

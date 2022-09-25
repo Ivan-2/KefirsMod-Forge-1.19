@@ -32,5 +32,22 @@ public class ModFlammableRotatedPillarBlock extends RotatedPillarBlock {
     public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return 5;
     }
+
+
+
+    @Override
+    public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+        if(context.getItemInHand().getItem() instanceof AxeItem) {
+            if(state.is(ModBlocks.BEECH_LOG.get())) {
+                return ModBlocks.STRIPPED_BEECH_LOG.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
+
+            if(state.is(ModBlocks.BEECH_WOOD.get())) {
+                return ModBlocks.STRIPPED_BEECH_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
+        }
+
+        return super.getToolModifiedState(state, context, toolAction, simulate);
+    }
 }
 

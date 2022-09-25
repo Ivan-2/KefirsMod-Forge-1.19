@@ -1,8 +1,9 @@
 {
     "ambientocclusion": false,
+    "render_type": "minecraft:translucent",
     "textures": {
-        "particle": "block/waterlily",
-        "texture": "block/waterlily"
+        "particle": "kefirsmod:block/waterlily",
+        "texture": "kefirsmod:block/waterlily"
     },
     "elements": [
         {   "from": [  0, 0.25,  0 ],
