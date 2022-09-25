@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "kefirsmod:cherries"
+    }
+  ],
+  "result": {
+    "item": "kefirsmod:cherry_sapling",
+    "count": 1
+  }
+}

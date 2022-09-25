@@ -37,6 +37,10 @@ public class ModItems {
             ()-> new Item( new Item.Properties().tab(CreativeModeTab.TAB_FOOD)
                             .food(new FoodProperties.Builder().nutrition(2).saturationMod(1f).build())));
 
+    public static final RegistryObject<Item> CHESTNUT = ITEMS.register("chestnut",
+            ()-> new Item( new Item.Properties().tab(CreativeModeTab.TAB_FOOD)));
+
+
 
 
     public static void register(IEventBus eventBus) {

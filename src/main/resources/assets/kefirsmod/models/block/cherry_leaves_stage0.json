@@ -2,7 +2,6 @@
   "parent": "minecraft:block/leaves",
   "render_type": "minecraft:cutout",
   "textures": {
-    "all": "kefirsmod:block/cherry_leaves_cherries",
-    "overlay": "kefirsmod:block/cherry_leaves_leaf_overlay"
+    "all": "kefirsmod:block/cherry_leaves"
   }
 }

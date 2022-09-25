@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "item": "minecraft:chest"
+    },
+    {
+      "item": "kefirsmod:chestnut_boat"
+    }
+  ],
+  "result": {
+    "item": "kefirsmod:chestnut_chest_boat"
+  }
+}

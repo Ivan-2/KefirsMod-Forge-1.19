@@ -46,18 +46,24 @@ public class ModConfiguredFeatures {
 
 
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> CHERRY_TREE =
-            FeatureUtils.register("beech", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+            FeatureUtils.register("cherry", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(ModBlocks.CHERRY_LOG.get()),
-                    new StraightTrunkPlacer(6, 2, 2),
+                    new StraightTrunkPlacer(4, 1, 1),
                     BlockStateProvider.simple(ModBlocks.CHERRY_BLOSSOM.get()),
-                    new BlobFoliagePlacer(ConstantInt.of(4), ConstantInt.of(2), 3),
+                    new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2),
                     new TwoLayersFeatureSize(1, 1, 2)).build());
 
+
+
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> CHESTNUT_TREE =
+            FeatureUtils.register("chestnut", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                    BlockStateProvider.simple(ModBlocks.CHESTNUT_LOG.get()),
+                    new FancyTrunkPlacer(12, 2, 3),
+                    BlockStateProvider.simple(ModBlocks.CHESTNUT_LEAVES.get()),
+                    new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 2),
+                    new TwoLayersFeatureSize(1, 0, 2)).build());
+
     public static final Holder<ConfiguredFeature<RandomFeatureConfiguration, ?>> BEECH_SPAWN =
-            FeatureUtils.register("beech_spawn", Feature.RANDOM_SELECTOR,
-                    new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(BEECH_CHECKED,
-                            5F)), FANCY_BEECH_CHECKED));
-    public static final Holder<ConfiguredFeature<RandomFeatureConfiguration, ?>> CHERRY_SPAWM =
             FeatureUtils.register("beech_spawn", Feature.RANDOM_SELECTOR,
                     new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(BEECH_CHECKED,
                             5F)), FANCY_BEECH_CHECKED));

@@ -3,13 +3,14 @@
   "block.kefirsmod.bronze_block": "Bronze Block",
 
 
-  "item.kefirsmod.blueberry": "Blueberry",
-  "item.minecraft.sweet_berries": "Lingonberry",
-  "item.kefirsmod.blackberry": "Blackberry",
-  "item.kefirsmod.rosehip": "Rosehip",
+  "item.kefirsmod.blueberry": "Blueberries",
+  "item.minecraft.sweet_berries": "Lingonberries",
+  "item.kefirsmod.blackberry": "Blackberries",
+  "item.kefirsmod.rosehip": "Rosehip Berries",
   "block.kefirsmod.yucca": "Yucca",
   "block.kefirsmod.sagebrush": "Sagebrush",
   "block.kefirsmod.waterlily": "Waterlily",
+  "item.kefirsmod.cherries": "Cherries",
 
   "block.kefirsmod.beech_log": "Beech Log",
   "block.kefirsmod.beech_wood": "Beech Wood",
@@ -27,5 +28,24 @@
   "block.kefirsmod.beech_pressure_plate": "Beech Pressure Plate",
   "block.kefirsmod.beech_button": "Beech Button",
   "block.kefirsmod.beech_sapling": "Beech Sapling",
-  "block.kefirsmod.beech_leaves": "Beech Leaves"
+  "block.kefirsmod.beech_leaves": "Beech Leaves",
+
+  "block.kefirsmod.cherry_log": "Cherry Log",
+  "block.kefirsmod.cherry_wood": "Cherry Wood",
+  "block.kefirsmod.stripped_cherry_log": "Stripped Cherry Log",
+  "block.kefirsmod.stripped_cherry_wood": "Stripped Cherry Wood",
+  "block.kefirsmod.cherry_planks": "Cherry Planks",
+  "block.kefirsmod.cherry_door": "Cherry Door",
+  "block.kefirsmod.cherry_trapdoor": "Cherry Trapdoor",
+  "block.kefirsmod.cherry_fence": "Cherry Fence",
+  "block.kefirsmod.cherry_fence_gate": "Cherry Gate",
+  "block.kefirsmod.cherry_stairs": "Cherry Stairs",
+  "block.kefirsmod.cherry_slab": "Cherry Slab",
+  "block.kefirsmod.cherry_sign": "Cherry Sign",
+  "block.kefirsmod.cherry_wall_sign": "Cherry Wall Sign",
+  "block.kefirsmod.cherry_pressure_plate": "Cherry Pressure Plate",
+  "block.kefirsmod.cherry_button": "Cherry Button",
+  "block.kefirsmod.cherry_sapling": "Cherry Sapling",
+  "block.kefirsmod.cherry_leaves": "Cherry Leaves",
+  "block.kefirsmod.cherry_blossom": "Cherry Blossom"
 }

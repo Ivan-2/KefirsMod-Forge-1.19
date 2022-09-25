@@ -16,9 +16,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
@@ -27,11 +29,16 @@ public class CherryLeavesBlock extends LeavesBlock implements BonemealableBlock 
 
     public static final int MAX_AGE = 3;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-    
-    public CherryLeavesBlock(Properties properties) {
-        super(properties);
-    }
+    public static final int DECAY_DISTANCE = 7;
+    public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE;
+    public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    private static final int TICK_DELAY = 1;
 
+    public CherryLeavesBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(DISTANCE, Integer.valueOf(7)).setValue(PERSISTENT, Boolean.valueOf(false)).setValue(WATERLOGGED, Boolean.valueOf(false)));
+    }
 
 
     public boolean isRandomlyTicking(BlockState p_57284_) {
@@ -69,8 +76,8 @@ public class CherryLeavesBlock extends LeavesBlock implements BonemealableBlock 
 
 
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_57282_) {
-        p_57282_.add(AGE);
+    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> blockState) {
+        blockState.add(AGE, PERSISTENT, WATERLOGGED, DISTANCE);
     }
 
     public boolean isValidBonemealTarget(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, boolean p_57263_) {

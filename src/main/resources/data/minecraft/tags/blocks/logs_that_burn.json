@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "#kefirsmod:beech_logs"
+    "#kefirsmod:beech_logs",
+    "#kefirsmod:cherry_logs",
+    "#kefirsmod:chestnut_logs"
   ]
 }

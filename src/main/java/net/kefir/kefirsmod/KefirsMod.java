@@ -99,7 +99,7 @@ public class KefirsMod
         {
             event.register(((state, btGetter, pos, tintIndex)
                     -> btGetter == null || pos == null ? 0 : btGetter.getBlockTint(pos, COLOR_RESOLVER)),
-                    ModBlocks.BEECH_LEAVES.get());
+                    ModBlocks.BEECH_LEAVES.get(), ModBlocks.CHERRY_LEAVES.get(), ModBlocks.CHESTNUT_LEAVES.get());
             event.register(((state, btGetter, pos, tintIndex)
                             -> btGetter == null || pos == null ? 2129968 : 7455580),
                     ModBlocks.WATERLILY.get());
@@ -111,15 +111,13 @@ public class KefirsMod
                 BlockState blockstate = ((BlockItem)itemColor.getItem()).getBlock().defaultBlockState();
                 return FoliageColor.getDefaultColor();
             },
-                    ModBlocks.BEECH_LEAVES.get()
-            );
+                    ModBlocks.BEECH_LEAVES.get(), ModBlocks.CHERRY_LEAVES.get(), ModBlocks.CHESTNUT_LEAVES.get());
 
             event.register((itemColor, item) -> {
                 BlockState blockstate = ((BlockItem)itemColor.getItem()).getBlock().defaultBlockState();
                 return FoliageColor.get(0.5D, 1.0D);
             },
-                    ModBlocks.WATERLILY.get()
-            );
+                    ModBlocks.WATERLILY.get());
         }
     }
 }

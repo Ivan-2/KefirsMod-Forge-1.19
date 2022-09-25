@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "kefirsmod:beech_leaves"
+    "kefirsmod:beech_leaves",
+    "kefirsmod:cherry_leaves",
+    "kefirsmod:cherry_blossom",
+    "kefirsmod:chestnut_leaves"
   ]
 }

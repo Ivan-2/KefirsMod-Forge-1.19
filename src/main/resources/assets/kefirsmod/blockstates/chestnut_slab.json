@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "kefirsmod:block/chestnut_slab"
+    },
+    "type=double": {
+      "model": "kefirsmod:block/chestnut_planks"
+    },
+    "type=top": {
+      "model": "kefirsmod:block/chestnut_slab_top"
+    }
+  }
+}

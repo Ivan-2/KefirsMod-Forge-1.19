@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "kefirsmod:chestnut_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "kefirsmod:chestnut_planks"
+  }
+}
