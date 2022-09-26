@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "kefirsmod:beech_pressure_plate"
+    "kefirsmod:beech_pressure_plate",
+    "kefirsmod:cherry_pressure_plate",
+    "kefirsmod:chestnut_pressure_plate",
+    "kefirsmod:maple_pressure_plate"
   ]
 }

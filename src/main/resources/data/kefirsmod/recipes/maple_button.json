@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "kefirsmod:maple_planks"
+    }
+  ],
+  "result": {
+    "item": "kefirsmod:maple_button"
+  }
+}

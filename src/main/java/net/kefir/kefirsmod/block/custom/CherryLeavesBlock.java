@@ -47,8 +47,16 @@ public class CherryLeavesBlock extends LeavesBlock implements BonemealableBlock 
 
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         int i = blockState.getValue(AGE);
-        if (i < 3 && serverLevel.getRawBrightness(blockPos.above(), 0) >= 9 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(serverLevel, blockPos, blockState, randomSource.nextInt(5) == 0)) {
+        boolean flag = i == 3;
+        if (i < 3 && serverLevel.getRawBrightness(blockPos.above(), 0) >= 9 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(serverLevel, blockPos, blockState, randomSource.nextInt(2) == 0)) {
             BlockState blockstate = blockState.setValue(AGE, Integer.valueOf(i + 1));
+            serverLevel.setBlock(blockPos, blockstate, 2);
+            serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(blockstate));
+            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(serverLevel, blockPos, blockState);
+        }
+        if (i == 3) {
+            popResource(serverLevel, blockPos, new ItemStack(ModItems.CHERRIES.get(), i + (flag ? 1 : 0)));
+            BlockState blockstate = blockState.setValue(AGE, Integer.valueOf(0));
             serverLevel.setBlock(blockPos, blockstate, 2);
             serverLevel.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(blockstate));
             net.minecraftforge.common.ForgeHooks.onCropsGrowPost(serverLevel, blockPos, blockState);

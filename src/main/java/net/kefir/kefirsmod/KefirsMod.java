@@ -103,6 +103,9 @@ public class KefirsMod
             event.register(((state, btGetter, pos, tintIndex)
                             -> btGetter == null || pos == null ? 2129968 : 7455580),
                     ModBlocks.WATERLILY.get());
+
+            event.register(((state, btGetter, pos, tintIndex) -> 11482680),
+                    ModBlocks.MAPLE_LEAVES.get());
         }
         @SubscribeEvent
         static void registerItemColor(RegisterColorHandlersEvent.Item event)
@@ -118,6 +121,9 @@ public class KefirsMod
                 return FoliageColor.get(0.5D, 1.0D);
             },
                     ModBlocks.WATERLILY.get());
+
+            event.register(((itemColor, item) -> 11482680),
+                    ModBlocks.MAPLE_LEAVES.get());
         }
     }
 }

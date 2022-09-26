@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "kefirsmod:beech_stairs"
+    "kefirsmod:beech_stairs",
+    "kefirsmod:cherry_stairs",
+    "kefirsmod:chestnut_stairs",
+    "kefirsmod:maple_stairs"
   ]
 }

@@ -29,8 +29,14 @@ public class CherryBlossomBlock extends LeavesBlock {
     }
 
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (player.getItemInHand(interactionHand).isEmpty()) {
             level.setBlock(blockPos, ModBlocks.CHERRY_LEAVES.get().defaultBlockState(), 1);
             level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockState));
-            return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+            return InteractionResult.PASS;
+        }
+        else {
+            return InteractionResult.FAIL;
+        }
+            //return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 }

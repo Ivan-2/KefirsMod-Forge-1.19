@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "kefirsmod:beech_wall_sign"
+    "kefirsmod:beech_wall_sign",
+    "kefirsmod:cherry_wall_sign",
+    "kefirsmod:chestnut_wall_sign",
+    "kefirsmod:maple_wall_sign"
   ]
 }

@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "kefirsmod:beech_button"
+    "kefirsmod:beech_button",
+    "kefirsmod:cherry_button",
+    "kefirsmod:chestnut_button",
+    "kefirsmod:maple_button"
   ]
 }

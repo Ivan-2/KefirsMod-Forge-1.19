@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "kefirsmod:beech_planks"
+    "kefirsmod:beech_planks",
+    "kefirsmod:cherry_planks",
+    "kefirsmod:chestnut_planks",
+    "kefirsmod:maple_planks"
   ]
 }

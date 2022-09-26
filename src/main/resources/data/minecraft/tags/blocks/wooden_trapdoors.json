@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "kefirsmod:beech_trapdoor"
+    "kefirsmod:beech_trapdoor",
+    "kefirsmod:cherry_trapdoor",
+    "kefirsmod:chestnut_trapdoor",
+    "kefirsmod:maple_trapdoor"
   ]
 }

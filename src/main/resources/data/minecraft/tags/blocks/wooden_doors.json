@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "minecraft:beech_door"
+    "kefirsmod:beech_door",
+    "kefirsmod:cherry_door",
+    "kefirsmod:chestnut_door",
+    "kefirsmod:maple_door"
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "kefirsmod:block/maple_planks",
+    "side": "kefirsmod:block/maple_planks",
+    "top": "kefirsmod:block/maple_planks"
+  }
+}

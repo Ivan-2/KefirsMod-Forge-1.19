@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "kefirsmod:beech_fence_gate"
+    "kefirsmod:beech_fence_gate",
+    "kefirsmod:cherry_fence_gate",
+    "kefirsmod:chestnut_fence_gate",
+    "kefirsmod:maple_fence_gate"
   ]
 }

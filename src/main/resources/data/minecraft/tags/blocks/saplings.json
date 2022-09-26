@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "kefirsmod:beech_sapling"
+    "kefirsmod:beech_sapling",
+    "kefirsmod:cherry_sapling",
+    "kefirsmod:chestnut_sapling",
+    "kefirsmod:maple_sapling"
   ]
 }
