@@ -1,0 +1,16 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "texture": "kefirsmod:block/yucca_stem",
+        "inside": "kefirsmod:block/yucca_stem",
+        "particle": "kefirsmod:block/yucca_stem"
+    },
+    "elements": [
+        {   "from": [ 4, 4, 4 ],
+            "to": [ 12, 12, 12 ],
+            "faces": {
+                "north": { "texture": "#inside" }
+            }
+        }
+    ]
+}

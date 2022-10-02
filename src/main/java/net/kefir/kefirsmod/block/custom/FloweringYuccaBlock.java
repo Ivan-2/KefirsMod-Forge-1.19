@@ -1,8 +1,10 @@
 package net.kefir.kefirsmod.block.custom;
 
+import net.kefir.kefirsmod.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,10 +15,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,8 +28,9 @@ import javax.annotation.Nullable;
 
 public class FloweringYuccaBlock extends YuccaBlock implements BonemealableBlock, net.minecraftforge.common.IForgeShearable {
 
-    public FloweringYuccaBlock(Properties properties) {
+    public FloweringYuccaBlock(YuccaStemBlock yuccastemblock, BlockBehaviour.Properties properties) {
         super(properties);
+        this.plant = yuccastemblock;
         this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER));
     }
 
@@ -45,82 +45,213 @@ public class FloweringYuccaBlock extends YuccaBlock implements BonemealableBlock
     }
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
-    public BlockState updateShape(BlockState p_52894_, Direction p_52895_, BlockState p_52896_, LevelAccessor p_52897_, BlockPos p_52898_, BlockPos p_52899_) {
-        DoubleBlockHalf doubleblockhalf = p_52894_.getValue(HALF);
-        if (p_52895_.getAxis() != Direction.Axis.Y || doubleblockhalf == DoubleBlockHalf.LOWER != (p_52895_ == Direction.UP) || p_52896_.is(this) && p_52896_.getValue(HALF) != doubleblockhalf) {
-            return doubleblockhalf == DoubleBlockHalf.LOWER && p_52895_ == Direction.DOWN && !p_52894_.canSurvive(p_52897_, p_52898_) ? Blocks.AIR.defaultBlockState() : super.updateShape(p_52894_, p_52895_, p_52896_, p_52897_, p_52898_, p_52899_);
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState1, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos1) {
+        DoubleBlockHalf doubleblockhalf = blockState.getValue(HALF);
+        if (direction.getAxis() != Direction.Axis.Y || doubleblockhalf == DoubleBlockHalf.LOWER != (direction == Direction.UP) || blockState1.is(this) && blockState1.getValue(HALF) != doubleblockhalf) {
+            return doubleblockhalf == DoubleBlockHalf.LOWER && direction == Direction.DOWN && !blockState.canSurvive(levelAccessor, blockPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(blockState, direction, blockState1, levelAccessor, blockPos, blockPos1);
         } else {
             return Blocks.AIR.defaultBlockState();
         }
     }
 
     @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext p_52863_) {
-        BlockPos blockpos = p_52863_.getClickedPos();
-        Level level = p_52863_.getLevel();
-        return blockpos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(blockpos.above()).canBeReplaced(p_52863_) ? super.getStateForPlacement(p_52863_) : null;
+    public BlockState getStateForPlacement(BlockPlaceContext placeContext) {
+        BlockPos blockpos = placeContext.getClickedPos();
+        Level level = placeContext.getLevel();
+        return blockpos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(blockpos.above()).canBeReplaced(placeContext) ? super.getStateForPlacement(placeContext) : null;
     }
 
-    public void setPlacedBy(Level p_52872_, BlockPos p_52873_, BlockState p_52874_, LivingEntity p_52875_, ItemStack p_52876_) {
-        BlockPos blockpos = p_52873_.above();
-        p_52872_.setBlock(blockpos, copyWaterloggedFrom(p_52872_, blockpos, this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER)), 3);
+    public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, LivingEntity livingEntity, ItemStack itemStack) {
+        BlockPos blockpos = blockPos.above();
+        level.setBlock(blockpos, copyWaterloggedFrom(level, blockpos, this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER)), 3);
     }
 
-    public boolean canSurvive(BlockState p_52887_, LevelReader p_52888_, BlockPos p_52889_) {
-        if (p_52887_.getValue(HALF) != DoubleBlockHalf.UPPER) {
-            return super.canSurvive(p_52887_, p_52888_, p_52889_);
+    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+        if (blockState.getValue(HALF) != DoubleBlockHalf.UPPER) {
+            return super.canSurvive(blockState, levelReader, blockPos);
         } else {
-            BlockState blockstate = p_52888_.getBlockState(p_52889_.below());
-            if (p_52887_.getBlock() != this) return super.canSurvive(p_52887_, p_52888_, p_52889_); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
+            BlockState blockstate = levelReader.getBlockState(blockPos.below());
+            if (blockState.getBlock() != this) return super.canSurvive(blockState, levelReader, blockPos); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
             return blockstate.is(this) && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER;
         }
     }
 
-    public static void placeAt(LevelAccessor p_153174_, BlockState p_153175_, BlockPos p_153176_, int p_153177_) {
-        BlockPos blockpos = p_153176_.above();
-        p_153174_.setBlock(p_153176_, copyWaterloggedFrom(p_153174_, p_153176_, p_153175_.setValue(HALF, DoubleBlockHalf.LOWER)), p_153177_);
-        p_153174_.setBlock(blockpos, copyWaterloggedFrom(p_153174_, blockpos, p_153175_.setValue(HALF, DoubleBlockHalf.UPPER)), p_153177_);
+    public static void placeAt(LevelAccessor levelAccessor, BlockState blockState, BlockPos blockPos, int i) {
+        BlockPos blockpos = blockPos.above();
+        levelAccessor.setBlock(blockPos, copyWaterloggedFrom(levelAccessor, blockPos, blockState.setValue(HALF, DoubleBlockHalf.LOWER)), i);
+        levelAccessor.setBlock(blockpos, copyWaterloggedFrom(levelAccessor, blockpos, blockState.setValue(HALF, DoubleBlockHalf.UPPER)), i);
     }
 
-    public static BlockState copyWaterloggedFrom(LevelReader p_182454_, BlockPos p_182455_, BlockState p_182456_) {
-        return p_182456_.hasProperty(BlockStateProperties.WATERLOGGED) ? p_182456_.setValue(BlockStateProperties.WATERLOGGED, Boolean.valueOf(p_182454_.isWaterAt(p_182455_))) : p_182456_;
+    public static BlockState copyWaterloggedFrom(LevelReader levelReader, BlockPos pos, BlockState blockState) {
+        return blockState.hasProperty(BlockStateProperties.WATERLOGGED) ? blockState.setValue(BlockStateProperties.WATERLOGGED, Boolean.valueOf(levelReader.isWaterAt(pos))) : blockState;
     }
 
-    public void playerWillDestroy(Level p_52878_, BlockPos p_52879_, BlockState p_52880_, Player p_52881_) {
-        if (!p_52878_.isClientSide) {
-            if (p_52881_.isCreative()) {
-                preventCreativeDropFromBottomPart(p_52878_, p_52879_, p_52880_, p_52881_);
+    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+        if (!level.isClientSide) {
+            if (player.isCreative()) {
+                preventCreativeDropFromBottomPart(level, blockPos, blockState, player);
             } else {
-                dropResources(p_52880_, p_52878_, p_52879_, (BlockEntity)null, p_52881_, p_52881_.getMainHandItem());
+                dropResources(blockState, level, blockPos, (BlockEntity)null, player, player.getMainHandItem());
             }
         }
 
-        super.playerWillDestroy(p_52878_, p_52879_, p_52880_, p_52881_);
+        super.playerWillDestroy(level, blockPos, blockState, player);
     }
 
-    public void playerDestroy(Level p_52865_, Player p_52866_, BlockPos p_52867_, BlockState p_52868_, @Nullable BlockEntity p_52869_, ItemStack p_52870_) {
-        super.playerDestroy(p_52865_, p_52866_, p_52867_, Blocks.AIR.defaultBlockState(), p_52869_, p_52870_);
+    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
+        super.playerDestroy(level, player, blockPos, Blocks.AIR.defaultBlockState(), blockEntity, itemStack);
     }
 
-    protected static void preventCreativeDropFromBottomPart(Level p_52904_, BlockPos p_52905_, BlockState p_52906_, Player p_52907_) {
-        DoubleBlockHalf doubleblockhalf = p_52906_.getValue(HALF);
+    protected static void preventCreativeDropFromBottomPart(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+        DoubleBlockHalf doubleblockhalf = blockState.getValue(HALF);
         if (doubleblockhalf == DoubleBlockHalf.UPPER) {
-            BlockPos blockpos = p_52905_.below();
-            BlockState blockstate = p_52904_.getBlockState(blockpos);
-            if (blockstate.is(p_52906_.getBlock()) && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            BlockPos blockpos = blockPos.below();
+            BlockState blockstate = level.getBlockState(blockpos);
+            if (blockstate.is(blockState.getBlock()) && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
                 BlockState blockstate1 = blockstate.hasProperty(BlockStateProperties.WATERLOGGED) && blockstate.getValue(BlockStateProperties.WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
-                p_52904_.setBlock(blockpos, blockstate1, 35);
-                p_52904_.levelEvent(p_52907_, 2001, blockpos, Block.getId(blockstate));
+                level.setBlock(blockpos, blockstate1, 35);
+                level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
             }
         }
 
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_52901_) {
-        p_52901_.add(HALF);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> blockStateBuilder) {
+        blockStateBuilder.add(HALF);
     }
 
-    public long getSeed(BlockState p_52891_, BlockPos p_52892_) {
-        return Mth.getSeed(p_52892_.getX(), p_52892_.below(p_52891_.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), p_52892_.getZ());
+    public long getSeed(BlockState blockState, BlockPos blockPos) {
+        return Mth.getSeed(blockPos.getX(), blockPos.below(blockState.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), blockPos.getZ());
+    }
+
+    private final YuccaStemBlock plant;
+
+    @Override
+    public void performBonemeal(BlockState blockState, ServerLevel level, BlockPos blockPos, RandomSource randomSource) {
+        BlockPos blockpos = blockPos.above();
+        if (level.isEmptyBlock(blockpos) && blockpos.getY() < level.getMaxBuildHeight()) {
+            if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, blockpos, blockState, true)) {
+                boolean flag = false;
+                boolean flag1 = false;
+                BlockState blockstate = level.getBlockState(blockPos.below());
+                if ((blockstate.is(BlockTags.DIRT) || blockstate.is(Blocks.FARMLAND) || blockstate.is(Blocks.SAND) || blockstate.is(Blocks.RED_SAND) || blockstate.is(Blocks.COARSE_DIRT))) {
+                    flag = true;
+                } else if (blockstate.is(this.plant)) {
+                    int j = 1;
+
+                    for(int k = 0; k < 4; ++k) {
+                        BlockState blockstate1 = level.getBlockState(blockPos.below(j + 1));
+                        if (!blockstate1.is(this.plant)) {
+                            if (blockstate1.is(BlockTags.DIRT) || blockstate1.is(Blocks.FARMLAND) || blockstate1.is(Blocks.SAND) || blockstate1.is(Blocks.RED_SAND) || blockstate1.is(Blocks.COARSE_DIRT)) {
+                                flag1 = true;
+                            }
+                            break;
+                        }
+
+                        ++j;
+                    }
+
+                    if (j < 2 || j <= randomSource.nextInt(flag1 ? 5 : 4)) {
+                        flag = true;
+                    }
+                } else if (blockstate.isAir()) {
+                    flag = true;
+                }
+
+                if (flag && allNeighborsEmpty(level, blockpos, (Direction)null) && level.isEmptyBlock(blockPos.above(2))) {
+                    level.setBlock(blockPos, this.plant.getStateForPlacement(level, blockPos), 2);
+                    this.placeGrownYucca(level, blockpos);
+                } else {
+                    int l = randomSource.nextInt(4);
+                    if (flag1) {
+                        ++l;
+                    }
+
+                    boolean flag2 = false;
+
+                    for(int i1 = 0; i1 < l; ++i1) {
+                        Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(randomSource);
+                        BlockPos blockpos1 = blockPos.relative(direction);
+                        if (level.isEmptyBlock(blockpos1) && level.isEmptyBlock(blockpos1.below()) && allNeighborsEmpty(level, blockpos1, direction.getOpposite())) {
+                            this.placeGrownYucca(level, blockpos1);
+                            flag2 = true;
+                        }
+                    }
+
+                    if (flag2) {
+                        level.setBlock(blockPos, this.plant.getStateForPlacement(level, blockPos), 2);
+                    } else {
+                        this.placeDeadFlower(level, blockPos);
+                    }
+                }
+                net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, blockPos, blockState);
+            }
+        }
+    }
+
+    private void placeGrownYucca(Level level, BlockPos blockPos) {
+        level.setBlock(blockPos, ModBlocks.YUCCA.get().defaultBlockState(), 2);
+        level.levelEvent(1033, blockPos, 0);
+    }
+
+    private void placeDeadFlower(Level level, BlockPos blockPos) {
+        level.setBlock(blockPos, this.defaultBlockState(), 2);
+        level.levelEvent(1034, blockPos, 0);
+    }
+
+    private static boolean allNeighborsEmpty(LevelReader levelReader, BlockPos blockPos, @Nullable Direction direction1) {
+        for(Direction direction : Direction.Plane.HORIZONTAL) {
+            if (direction != direction1 && !levelReader.isEmptyBlock(blockPos.relative(direction))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    public static void generatePlant(LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, int i) {
+        levelAccessor.setBlock(blockPos, ((YuccaStemBlock)ModBlocks.YUCCA_STEM.get()).getStateForPlacement(levelAccessor, blockPos), 2);
+        growTreeRecursive(levelAccessor, blockPos, randomSource, blockPos, i, 0);
+    }
+
+    private static void growTreeRecursive(LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, BlockPos blockPos1, int i1, int i2) {
+        YuccaStemBlock yuccastemblock = (YuccaStemBlock)ModBlocks.YUCCA_STEM.get();
+        int i = randomSource.nextInt(4) + 1;
+        if (i2 == 0) {
+            ++i;
+        }
+
+        for(int j = 0; j < i; ++j) {
+            BlockPos blockpos = blockPos.above(j + 1);
+            if (!allNeighborsEmpty(levelAccessor, blockpos, (Direction)null)) {
+                return;
+            }
+
+            levelAccessor.setBlock(blockpos, yuccastemblock.getStateForPlacement(levelAccessor, blockpos), 2);
+            levelAccessor.setBlock(blockpos.below(), yuccastemblock.getStateForPlacement(levelAccessor, blockpos.below()), 2);
+        }
+
+        boolean flag = false;
+        if (i2 < 4) {
+            int l = randomSource.nextInt(4);
+            if (i2 == 0) {
+                ++l;
+            }
+
+            for(int k = 0; k < l; ++k) {
+                Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(randomSource);
+                BlockPos blockpos1 = blockPos.above(i).relative(direction);
+                if (Math.abs(blockpos1.getX() - blockPos1.getX()) < i1 && Math.abs(blockpos1.getZ() - blockPos1.getZ()) < i1 && levelAccessor.isEmptyBlock(blockpos1) && levelAccessor.isEmptyBlock(blockpos1.below()) && allNeighborsEmpty(levelAccessor, blockpos1, direction.getOpposite())) {
+                    flag = true;
+                    levelAccessor.setBlock(blockpos1, yuccastemblock.getStateForPlacement(levelAccessor, blockpos1), 2);
+                    levelAccessor.setBlock(blockpos1.relative(direction.getOpposite()), yuccastemblock.getStateForPlacement(levelAccessor, blockpos1.relative(direction.getOpposite())), 2);
+                    growTreeRecursive(levelAccessor, blockpos1, randomSource, blockPos1, i1, i2 + 1);
+                }
+            }
+        }
+
+        if (!flag) {
+            levelAccessor.setBlock(blockPos.above(i), ModBlocks.YUCCA.get().defaultBlockState(), 2);
+        }
+
     }
 }

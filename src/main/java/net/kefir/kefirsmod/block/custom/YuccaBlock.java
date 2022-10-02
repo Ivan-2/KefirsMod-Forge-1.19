@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class YuccaBlock extends SpikyBushBlock implements BonemealableBlock, net.minecraftforge.common.IForgeShearable {
+public abstract class YuccaBlock extends SpikyBushBlock implements BonemealableBlock, net.minecraftforge.common.IForgeShearable {
 
     public YuccaBlock(Properties properties) {
         super(properties);
@@ -43,4 +43,6 @@ public class YuccaBlock extends SpikyBushBlock implements BonemealableBlock, net
         }
 
     }
+
+    public abstract void performBonemeal(BlockState blockState, ServerLevel level, BlockPos blockPos, RandomSource randomSource);
 }

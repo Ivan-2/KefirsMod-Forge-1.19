@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -42,8 +43,12 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> YUCCA = registerBlock("yucca",
             ()-> new YuccaBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)), CreativeModeTab.TAB_DECORATIONS);
+
+    public static final RegistryObject<Block> YUCCA_STEM = registerBlock("yucca_stem",
+            ()-> new YuccaStemBlock(BlockBehaviour.Properties.of(Material.PLANT,
+                    MaterialColor.COLOR_BROWN).strength(0.4F).sound(SoundType.WOOD).noOcclusion()), CreativeModeTab.TAB_DECORATIONS);
     public static final RegistryObject<Block> FLOWERING_YUCCA = registerBlock("flowering_yucca",
-            ()-> new FloweringYuccaBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)), CreativeModeTab.TAB_DECORATIONS);
+            ()-> new FloweringYuccaBlock((YuccaStemBlock)YUCCA_STEM.get(), BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)), CreativeModeTab.TAB_DECORATIONS);
 
     public static final RegistryObject<Block> POTTED_YUCCA = BLOCKS.register("potted_yucca",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), ModBlocks.YUCCA,
