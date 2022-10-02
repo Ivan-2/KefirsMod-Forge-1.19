@@ -2,7 +2,7 @@
   "parent": "minecraft:block/door_bottom_right_open",
   "render_type": "minecraft:translucent",
   "textures": {
-    "bottom": "kefirsmod:block/chestnut_door_bottom",
-    "top": "kefirsmod:block/chestnut_door_top"
+    "bottom": "kefirsmod:block/maple_door_bottom",
+    "top": "kefirsmod:block/maple_door_top"
   }
 }

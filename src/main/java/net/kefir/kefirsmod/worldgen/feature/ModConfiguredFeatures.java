@@ -62,21 +62,21 @@ public class ModConfiguredFeatures {
                     new FancyTrunkPlacer(12, 2, 3),
                     BlockStateProvider.simple(ModBlocks.CHESTNUT_LEAVES.get()),
                     new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 2),
-                    new TwoLayersFeatureSize(1, 0, 2)).build());
+                    new TwoLayersFeatureSize(1, 1, 2)).build());
 
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> MAPLE_TREE =
             FeatureUtils.register("maple", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(ModBlocks.MAPLE_LOG.get()),
-                    new FancyTrunkPlacer(7, 2, 2),
+                    new FancyTrunkPlacer(6, 2, 2),
                     BlockStateProvider.simple(ModBlocks.MAPLE_LEAVES.get()),
-                    new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(1), 2),
-                    new TwoLayersFeatureSize(1, 0, 2)).build());
+                    new BlobFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), 2),
+                    new TwoLayersFeatureSize(1, 1, 2)).build());
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> FIR_TREE =
             FeatureUtils.register("fir", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                    BlockStateProvider.simple(ModBlocks.CHERRY_LOG.get()),
-                    new StraightTrunkPlacer(13, 2, 2),
-                    BlockStateProvider.simple(ModBlocks.CHERRY_LEAVES.get()),
-                    new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(7)),
+                    BlockStateProvider.simple(ModBlocks.FIR_LOG.get()),
+                    new StraightTrunkPlacer(13, 3, 3),
+                    BlockStateProvider.simple(ModBlocks.FIR_LEAVES.get()),
+                    new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(6)),
                     new TwoLayersFeatureSize(1, 0, 2)).build());
 
     public static final Holder<ConfiguredFeature<RandomFeatureConfiguration, ?>> BEECH_SPAWN =

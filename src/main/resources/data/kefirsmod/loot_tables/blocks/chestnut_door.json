@@ -13,7 +13,7 @@
           "type": "minecraft:item",
           "conditions": [
             {
-              "block": "kefirsmod:beech_door",
+              "block": "kefirsmod:chestnut_door",
               "condition": "minecraft:block_state_property",
               "properties": {
                 "half": "lower"

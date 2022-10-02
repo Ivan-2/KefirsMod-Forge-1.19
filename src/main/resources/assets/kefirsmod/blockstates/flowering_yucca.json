@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "kefirsmod:block/flowering_yucca_bottom"
+    },
+    "half=upper": {
+      "model": "kefirsmod:block/flowering_yucca_top"
+    }
+  }
+}

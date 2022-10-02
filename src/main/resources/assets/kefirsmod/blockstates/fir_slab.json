@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "kefirsmod:block/fir_slab"
+    },
+    "type=double": {
+      "model": "kefirsmod:block/fir_planks"
+    },
+    "type=top": {
+      "model": "kefirsmod:block/fir_slab_top"
+    }
+  }
+}

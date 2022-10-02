@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "kefirsmod:block/fir_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "kefirsmod:block/fir_wood"
+    },
+    "axis=z": {
+      "model": "kefirsmod:block/fir_wood",
+      "x": 90
+    }
+  }
+}

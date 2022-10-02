@@ -64,8 +64,8 @@ public class CherryLeavesBlock extends LeavesBlock implements BonemealableBlock 
 
     }
     
-    public InteractionResult use(BlockState p_57275_, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        int i = p_57275_.getValue(AGE);
+    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        int i = blockState.getValue(AGE);
         boolean flag = i == 3;
         if (!flag && player.getItemInHand(interactionHand).is(Items.BONE_MEAL)) {
             return InteractionResult.PASS;
@@ -73,12 +73,12 @@ public class CherryLeavesBlock extends LeavesBlock implements BonemealableBlock 
             int j = 1 + level.random.nextInt(2);
             popResource(level, blockPos, new ItemStack(ModItems.CHERRIES.get(), j + (flag ? 1 : 0)));
             level.playSound((Player)null, blockPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-            BlockState blockstate = p_57275_.setValue(AGE, Integer.valueOf(1));
+            BlockState blockstate = blockState.setValue(AGE, Integer.valueOf(1));
             level.setBlock(blockPos, blockstate, 2);
             level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockstate));
             return InteractionResult.sidedSuccess(level.isClientSide);
         } else {
-            return super.use(p_57275_, level, blockPos, player, interactionHand, blockHitResult);
+            return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
         }
     }
 

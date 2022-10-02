@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "kefirsmod:block/fir_planks",
+    "side": "kefirsmod:block/fir_planks",
+    "top": "kefirsmod:block/fir_planks"
+  }
+}

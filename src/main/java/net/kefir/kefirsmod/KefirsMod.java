@@ -3,6 +3,8 @@ package net.kefir.kefirsmod;
 import com.mojang.logging.LogUtils;
 import net.kefir.kefirsmod.block.ModBlocks;
 import net.kefir.kefirsmod.item.ModItems;
+import net.kefir.kefirsmod.particle.ModParticles;
+import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.color.item.ItemColors;
@@ -53,6 +55,7 @@ public class KefirsMod
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModParticles.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -100,11 +103,14 @@ public class KefirsMod
             event.register(((state, btGetter, pos, tintIndex)
                     -> btGetter == null || pos == null ? 0 : btGetter.getBlockTint(pos, COLOR_RESOLVER)),
                     ModBlocks.BEECH_LEAVES.get(), ModBlocks.CHERRY_LEAVES.get(), ModBlocks.CHESTNUT_LEAVES.get());
-            event.register(((state, btGetter, pos, tintIndex)
-                            -> btGetter == null || pos == null ? 2129968 : 7455580),
+
+            event.register(((state, btGetter, pos, tintIndex) -> 2129968),
                     ModBlocks.WATERLILY.get());
 
-            event.register(((state, btGetter, pos, tintIndex) -> 11482680),
+            event.register(((state, btGetter, pos, tintIndex) -> FoliageColor.getEvergreenColor()),
+                    ModBlocks.FIR_LEAVES.get());
+
+            event.register(((state, btGetter, pos, tintIndex) -> 14241293),
                     ModBlocks.MAPLE_LEAVES.get());
         }
         @SubscribeEvent
@@ -122,7 +128,13 @@ public class KefirsMod
             },
                     ModBlocks.WATERLILY.get());
 
-            event.register(((itemColor, item) -> 11482680),
+            event.register((itemColor, item) -> {
+                        BlockState blockstate = ((BlockItem)itemColor.getItem()).getBlock().defaultBlockState();
+                        return FoliageColor.getEvergreenColor();
+                    },
+                    ModBlocks.FIR_LEAVES.get());
+
+            event.register(((itemColor, item) -> 14241293),
                     ModBlocks.MAPLE_LEAVES.get());
         }
     }

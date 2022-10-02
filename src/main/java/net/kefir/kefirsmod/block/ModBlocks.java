@@ -3,10 +3,7 @@ package net.kefir.kefirsmod.block;
 import net.kefir.kefirsmod.KefirsMod;
 import net.kefir.kefirsmod.block.custom.*;
 import net.kefir.kefirsmod.item.ModItems;
-import net.kefir.kefirsmod.worldgen.feature.tree.BeechTreeGrower;
-import net.kefir.kefirsmod.worldgen.feature.tree.CherryTreeGrower;
-import net.kefir.kefirsmod.worldgen.feature.tree.ChestnutTreeGrower;
-import net.kefir.kefirsmod.worldgen.feature.tree.MapleTreeGrower;
+import net.kefir.kefirsmod.worldgen.feature.tree.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
@@ -44,7 +41,9 @@ public class ModBlocks {
             ()-> new RosehipBushBlock(BlockBehaviour.Properties.copy(Blocks.SWEET_BERRY_BUSH)));
 
     public static final RegistryObject<Block> YUCCA = registerBlock("yucca",
-            ()-> new SpikyBushBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)), CreativeModeTab.TAB_DECORATIONS);
+            ()-> new YuccaBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)), CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> FLOWERING_YUCCA = registerBlock("flowering_yucca",
+            ()-> new FloweringYuccaBlock(BlockBehaviour.Properties.copy(Blocks.DEAD_BUSH)), CreativeModeTab.TAB_DECORATIONS);
 
     public static final RegistryObject<Block> POTTED_YUCCA = BLOCKS.register("potted_yucca",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), ModBlocks.YUCCA,
@@ -60,7 +59,7 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> WATERLILY = registerBlock("waterlily",
-            ()-> new WaterlilyBlock(BlockBehaviour.Properties.copy(LILY_PAD)), CreativeModeTab.TAB_DECORATIONS);
+            ()-> new ModWaterlilyBlock(BlockBehaviour.Properties.copy(LILY_PAD)), CreativeModeTab.TAB_DECORATIONS);
 
 
 
@@ -525,8 +524,120 @@ public class ModBlocks {
             () -> new SaplingBlock(new MapleTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
 
-    public static final RegistryObject<Block> POTTED_maple_SAPLING = BLOCKS.register("potted_maple_sapling",
+    public static final RegistryObject<Block> POTTED_MAPLE_SAPLING = BLOCKS.register("potted_maple_sapling",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), ModBlocks.MAPLE_SAPLING,
+                    BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
+
+
+    //fir
+    public static final RegistryObject<Block> FIR_LOG = registerBlock("fir_log",
+            ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> FIR_WOOD = registerBlock("fir_wood",
+            ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> STRIPPED_FIR_LOG = registerBlock("stripped_fir_log",
+            ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> STRIPPED_FIR_WOOD = registerBlock("stripped_fir_wood",
+            ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> FIR_PLANKS = registerBlock("fir_planks",
+            () -> new Block(BlockBehaviour.Properties.copy(OAK_PLANKS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 20;
+                }
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 5;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> FIR_STAIRS = registerBlock("fir_stairs",
+            () ->  new StairBlock(OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.copy(OAK_STAIRS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 20;
+                }
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 5;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> FIR_SLAB = registerBlock("fir_slab",
+            () ->  new SlabBlock(BlockBehaviour.Properties.copy(OAK_SLAB)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 20;
+                }
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 5;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    //to be done
+    public static final RegistryObject<Block> FIR_SIGN = registerBlock("fir_sign",
+            () -> new StandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), WoodType.OAK), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    //public static final RegistryObject<Block> FIR_WALL_SIGN = registerBlock("fir_wall_sign",
+    //        () -> new WallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), WoodType.OAK), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> FIR_FENCE = registerBlock("fir_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(OAK_FENCE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> FIR_FENCE_GATE = registerBlock("fir_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(OAK_FENCE_GATE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+
+    public static final RegistryObject<Block> FIR_DOOR = registerBlock("fir_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.of(Material.WOOD)
+                    .strength(5f).requiresCorrectToolForDrops()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> FIR_TRAPDOOR = registerBlock("fir_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.of(Material.WOOD)
+                    .strength(5f).requiresCorrectToolForDrops()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> FIR_PRESSURE_PLATE = registerBlock("fir_pressure_plate",
+            ()-> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of(Material.WOOD).noCollission().strength(0.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_REDSTONE);
+    public static final RegistryObject<Block> FIR_BUTTON = registerBlock("fir_button",
+            ()-> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), CreativeModeTab.TAB_REDSTONE);
+
+
+    public static final RegistryObject<Block> FIR_LEAVES = registerBlock("fir_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 30;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+
+    public static final RegistryObject<Block> FIR_SAPLING = registerBlock("fir_sapling",
+            () -> new SaplingBlock(new FirTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+
+    public static final RegistryObject<Block> POTTED_FIR_SAPLING = BLOCKS.register("potted_fir_sapling",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), ModBlocks.FIR_SAPLING,
                     BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
 
