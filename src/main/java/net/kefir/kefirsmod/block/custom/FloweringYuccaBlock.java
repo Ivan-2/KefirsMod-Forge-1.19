@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -126,15 +127,14 @@ public class FloweringYuccaBlock extends YuccaBlock implements BonemealableBlock
 
     private final YuccaStemBlock plant;
 
-    @Override
-    public void performBonemeal(BlockState blockState, ServerLevel level, BlockPos blockPos, RandomSource randomSource) {
+    public void performBonemeal(ServerLevel level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         BlockPos blockpos = blockPos.above();
         if (level.isEmptyBlock(blockpos) && blockpos.getY() < level.getMaxBuildHeight()) {
             if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, blockpos, blockState, true)) {
                 boolean flag = false;
                 boolean flag1 = false;
                 BlockState blockstate = level.getBlockState(blockPos.below());
-                if ((blockstate.is(BlockTags.DIRT) || blockstate.is(Blocks.FARMLAND) || blockstate.is(Blocks.SAND) || blockstate.is(Blocks.RED_SAND) || blockstate.is(Blocks.COARSE_DIRT))) {
+                if ((blockstate.is(BlockTags.DIRT) || blockstate.is(Blocks.FARMLAND) || blockstate.is(Blocks.SAND) || blockstate.is(Blocks.RED_SAND) || blockstate.is(Blocks.COARSE_DIRT) || blockstate.is(ModBlocks.YUCCA_STEM.get()) )) {
                     flag = true;
                 } else if (blockstate.is(this.plant)) {
                     int j = 1;
@@ -142,7 +142,7 @@ public class FloweringYuccaBlock extends YuccaBlock implements BonemealableBlock
                     for(int k = 0; k < 4; ++k) {
                         BlockState blockstate1 = level.getBlockState(blockPos.below(j + 1));
                         if (!blockstate1.is(this.plant)) {
-                            if (blockstate1.is(BlockTags.DIRT) || blockstate1.is(Blocks.FARMLAND) || blockstate1.is(Blocks.SAND) || blockstate1.is(Blocks.RED_SAND) || blockstate1.is(Blocks.COARSE_DIRT)) {
+                            if (blockstate1.is(BlockTags.DIRT) || blockstate1.is(Blocks.FARMLAND) || blockstate1.is(Blocks.SAND) || blockstate1.is(Blocks.RED_SAND) || blockstate1.is(Blocks.COARSE_DIRT) || blockstate1.is(ModBlocks.YUCCA_STEM.get())) {
                                 flag1 = true;
                             }
                             break;
@@ -208,12 +208,12 @@ public class FloweringYuccaBlock extends YuccaBlock implements BonemealableBlock
 
         return true;
     }
-    public static void generatePlant(LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, int i) {
+    public static void generatePlant(@NotNull LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, int i) {
         levelAccessor.setBlock(blockPos, ((YuccaStemBlock)ModBlocks.YUCCA_STEM.get()).getStateForPlacement(levelAccessor, blockPos), 2);
         growTreeRecursive(levelAccessor, blockPos, randomSource, blockPos, i, 0);
     }
 
-    private static void growTreeRecursive(LevelAccessor levelAccessor, BlockPos blockPos, RandomSource randomSource, BlockPos blockPos1, int i1, int i2) {
+    private static void growTreeRecursive(LevelAccessor levelAccessor, BlockPos blockPos, @NotNull RandomSource randomSource, BlockPos blockPos1, int i1, int i2) {
         YuccaStemBlock yuccastemblock = (YuccaStemBlock)ModBlocks.YUCCA_STEM.get();
         int i = randomSource.nextInt(4) + 1;
         if (i2 == 0) {

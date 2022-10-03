@@ -110,6 +110,9 @@ public class KefirsMod
             event.register(((state, btGetter, pos, tintIndex) -> FoliageColor.getEvergreenColor()),
                     ModBlocks.FIR_LEAVES.get());
 
+            event.register(((state, btGetter, pos, tintIndex) -> FoliageColor.getBirchColor()),
+                    ModBlocks.POPLAR_LEAVES.get());
+
             event.register(((state, btGetter, pos, tintIndex) -> 14241293),
                     ModBlocks.MAPLE_LEAVES.get());
         }
@@ -133,6 +136,12 @@ public class KefirsMod
                         return FoliageColor.getEvergreenColor();
                     },
                     ModBlocks.FIR_LEAVES.get());
+
+            event.register((itemColor, item) -> {
+                        BlockState blockstate = ((BlockItem)itemColor.getItem()).getBlock().defaultBlockState();
+                        return FoliageColor.getBirchColor();
+                    },
+                    ModBlocks.POPLAR_LEAVES.get());
 
             event.register(((itemColor, item) -> 14241293),
                     ModBlocks.MAPLE_LEAVES.get());

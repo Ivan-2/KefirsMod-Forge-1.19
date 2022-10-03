@@ -4,6 +4,8 @@
     "kefirsmod:beech_button",
     "kefirsmod:cherry_button",
     "kefirsmod:chestnut_button",
-    "kefirsmod:maple_button"
+    "kefirsmod:maple_button",
+    "kefirsmod:fir_button",
+    "kefirsmod:poplar_button"
   ]
 }

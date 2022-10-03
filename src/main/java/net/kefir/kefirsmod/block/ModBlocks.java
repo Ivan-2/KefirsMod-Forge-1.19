@@ -647,6 +647,119 @@ public class ModBlocks {
 
 
 
+    //poplar
+    public static final RegistryObject<Block> POPLAR_LOG = registerBlock("poplar_log",
+            ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> POPLAR_WOOD = registerBlock("poplar_wood",
+            ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> STRIPPED_POPLAR_LOG = registerBlock("stripped_poplar_log",
+            ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> STRIPPED_POPLAR_WOOD = registerBlock("stripped_poplar_wood",
+            ()-> new ModFlammableRotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_WOOD)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> POPLAR_PLANKS = registerBlock("poplar_planks",
+            () -> new Block(BlockBehaviour.Properties.copy(OAK_PLANKS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 20;
+                }
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 5;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> POPLAR_STAIRS = registerBlock("poplar_stairs",
+            () ->  new StairBlock(OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.copy(OAK_STAIRS)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 20;
+                }
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 5;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> POPLAR_SLAB = registerBlock("poplar_slab",
+            () ->  new SlabBlock(BlockBehaviour.Properties.copy(OAK_SLAB)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 20;
+                }
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 5;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    //to be done
+    public static final RegistryObject<Block> POPLAR_SIGN = registerBlock("poplar_sign",
+            () -> new StandingSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SIGN), WoodType.OAK), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    //public static final RegistryObject<Block> POPLAR_WALL_SIGN = registerBlock("poplar_wall_sign",
+    //        () -> new WallSignBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WALL_SIGN), WoodType.OAK), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> POPLAR_FENCE = registerBlock("poplar_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(OAK_FENCE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> POPLAR_FENCE_GATE = registerBlock("poplar_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(OAK_FENCE_GATE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+
+    public static final RegistryObject<Block> POPLAR_DOOR = registerBlock("poplar_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.of(Material.WOOD)
+                    .strength(5f).requiresCorrectToolForDrops()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> POPLAR_TRAPDOOR = registerBlock("poplar_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.of(Material.WOOD)
+                    .strength(5f).requiresCorrectToolForDrops()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> POPLAR_PRESSURE_PLATE = registerBlock("poplar_pressure_plate",
+            ()-> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.of(Material.WOOD).noCollission().strength(0.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_REDSTONE);
+    public static final RegistryObject<Block> POPLAR_BUTTON = registerBlock("poplar_button",
+            ()-> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)), CreativeModeTab.TAB_REDSTONE);
+
+
+    public static final RegistryObject<Block> POPLAR_LEAVES = registerBlock("poplar_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)) {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
+                    return 30;
+                }
+            }, CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+
+    public static final RegistryObject<Block> POPLAR_SAPLING = registerBlock("poplar_sapling",
+            () -> new SaplingBlock(new PoplarTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+
+    public static final RegistryObject<Block> POTTED_POPLAR_SAPLING = BLOCKS.register("potted_poplar_sapling",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), ModBlocks.POPLAR_SAPLING,
+                    BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
+
+
+
+
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

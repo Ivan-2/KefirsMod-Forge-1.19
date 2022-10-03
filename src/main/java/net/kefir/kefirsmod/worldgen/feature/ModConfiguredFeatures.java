@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePla
 import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -78,6 +79,15 @@ public class ModConfiguredFeatures {
                     BlockStateProvider.simple(ModBlocks.FIR_LEAVES.get()),
                     new SpruceFoliagePlacer(ConstantInt.of(3), ConstantInt.of(2), ConstantInt.of(6)),
                     new TwoLayersFeatureSize(1, 0, 2)).build());
+
+
+    public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> POPLAR_TREE =
+            FeatureUtils.register("poplar", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                    BlockStateProvider.simple(ModBlocks.POPLAR_LOG.get()),
+                    new ForkingTrunkPlacer(12, 2, 2),
+                    BlockStateProvider.simple(ModBlocks.POPLAR_LEAVES.get()),
+                    new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2), 12),
+                    new TwoLayersFeatureSize(1, 1, 2)).build());
 
     public static final Holder<ConfiguredFeature<RandomFeatureConfiguration, ?>> BEECH_SPAWN =
             FeatureUtils.register("beech_spawn", Feature.RANDOM_SELECTOR,

@@ -20,12 +20,15 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public abstract class YuccaBlock extends SpikyBushBlock implements BonemealableBlock, net.minecraftforge.common.IForgeShearable {
+public class YuccaBlock extends SpikyBushBlock implements BonemealableBlock, net.minecraftforge.common.IForgeShearable {
 
     public YuccaBlock(Properties properties) {
         super(properties);
     }
 
+    public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return blockState.is(BlockTags.DIRT) || blockState.is(Blocks.FARMLAND) || blockState.is(Blocks.SAND) || blockState.is(Blocks.RED_SAND) || blockState.is(Blocks.COARSE_DIRT) || blockState.is(ModBlocks.YUCCA_STEM.get());
+    }
 
     @Override
     public boolean isValidBonemealTarget(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, boolean p_50900_) {
@@ -43,6 +46,4 @@ public abstract class YuccaBlock extends SpikyBushBlock implements BonemealableB
         }
 
     }
-
-    public abstract void performBonemeal(BlockState blockState, ServerLevel level, BlockPos blockPos, RandomSource randomSource);
 }

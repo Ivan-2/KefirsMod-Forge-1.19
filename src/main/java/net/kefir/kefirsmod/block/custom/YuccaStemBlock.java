@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import org.jetbrains.annotations.NotNull;
 
 public class YuccaStemBlock extends PipeBlock {
 
@@ -36,15 +37,22 @@ public class YuccaStemBlock extends PipeBlock {
         BlockState blockstate3 = blockGetter.getBlockState(blockPos.east());
         BlockState blockstate4 = blockGetter.getBlockState(blockPos.south());
         BlockState blockstate5 = blockGetter.getBlockState(blockPos.west());
-        return this.defaultBlockState().setValue(DOWN, Boolean.valueOf(blockstate.is(this) || blockstate.is(Blocks.CHORUS_FLOWER) || blockstate.is(Blocks.END_STONE))).setValue(UP, Boolean.valueOf(blockstate1.is(this) || blockstate1.is(Blocks.CHORUS_FLOWER))).setValue(NORTH, Boolean.valueOf(blockstate2.is(this) || blockstate2.is(Blocks.CHORUS_FLOWER))).setValue(EAST, Boolean.valueOf(blockstate3.is(this) || blockstate3.is(Blocks.CHORUS_FLOWER))).setValue(SOUTH, Boolean.valueOf(blockstate4.is(this) || blockstate4.is(Blocks.CHORUS_FLOWER))).setValue(WEST, Boolean.valueOf(blockstate5.is(this) || blockstate5.is(Blocks.CHORUS_FLOWER)));
+        return this.defaultBlockState()
+                .setValue(DOWN, Boolean.valueOf(blockstate.is(this) || blockstate.is(BlockTags.DIRT) || blockstate.is(Blocks.FARMLAND) || blockstate.is(Blocks.SAND) || blockstate.is(Blocks.RED_SAND) || blockstate.is(Blocks.COARSE_DIRT) ))
+                .setValue(UP, Boolean.valueOf(blockstate1.is(this) || blockstate1.is(ModBlocks.FLOWERING_YUCCA.get()) || blockstate1.is(ModBlocks.YUCCA.get()) ))
+                .setValue(NORTH, Boolean.valueOf(blockstate2.is(this)))
+                .setValue(EAST, Boolean.valueOf(blockstate3.is(this)))
+                .setValue(SOUTH, Boolean.valueOf(blockstate4.is(this)))
+                .setValue(WEST, Boolean.valueOf(blockstate5.is(this)));
     }
 
-    public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState1, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos1) {
+    @Override
+    public BlockState updateShape(@NotNull BlockState blockState, Direction direction, BlockState blockState1, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos1) {
         if (!blockState.canSurvive(levelAccessor, blockPos)) {
             levelAccessor.scheduleTick(blockPos, this, 1);
             return super.updateShape(blockState, direction, blockState1, levelAccessor, blockPos, blockPos1);
         } else {
-            boolean flag = blockState1.is(this) || blockState1.is(ModBlocks.FLOWERING_YUCCA.get()) || direction == Direction.DOWN && blockState1.is(BlockTags.DIRT) || blockState1.is(Blocks.FARMLAND) || blockState1.is(Blocks.SAND) || blockState1.is(Blocks.RED_SAND) || blockState1.is(Blocks.COARSE_DIRT);
+            boolean flag = blockState1.is(this) || direction == Direction.UP && blockState1.is(ModBlocks.FLOWERING_YUCCA.get()) || direction == Direction.UP && blockState1.is(ModBlocks.YUCCA.get()) || direction == Direction.DOWN && blockState1.is(BlockTags.DIRT) || direction == Direction.DOWN && blockState1.is(Blocks.FARMLAND) || direction == Direction.DOWN && blockState1.is(Blocks.SAND) || direction == Direction.DOWN && blockState1.is(Blocks.RED_SAND) || direction == Direction.DOWN && blockState1.is(Blocks.COARSE_DIRT);
             return blockState.setValue(PROPERTY_BY_DIRECTION.get(direction), Boolean.valueOf(flag));
         }
     }
@@ -65,17 +73,17 @@ public class YuccaStemBlock extends PipeBlock {
             BlockState blockstate1 = levelReader.getBlockState(blockpos);
             if (blockstate1.is(this)) {
                 if (flag) {
-                    return false;
+                    return true;
                 }
 
                 BlockState blockstate2 = levelReader.getBlockState(blockpos.below());
-                if (blockstate2.is(this) || blockstate2.is(BlockTags.DIRT) || blockstate2.is(Blocks.FARMLAND) || blockstate2.is(Blocks.SAND) || blockstate2.is(Blocks.RED_SAND) || blockstate2.is(Blocks.COARSE_DIRT)) {
+                if (blockstate2.is(this) || blockstate2.is(BlockTags.DIRT) || blockstate2.is(Blocks.FARMLAND) || blockstate2.is(Blocks.SAND) || blockstate2.is(Blocks.RED_SAND) || blockstate2.is(Blocks.COARSE_DIRT) || blockstate2.is(ModBlocks.YUCCA_STEM.get())) {
                     return true;
                 }
             }
         }
 
-        return blockstate.is(this) || blockstate.is(BlockTags.DIRT) || blockstate.is(Blocks.FARMLAND) || blockstate.is(Blocks.SAND) || blockstate.is(Blocks.RED_SAND) || blockstate.is(Blocks.COARSE_DIRT);
+        return blockstate.is(this) || blockstate.is(BlockTags.DIRT) || blockstate.is(Blocks.FARMLAND) || blockstate.is(Blocks.SAND) || blockstate.is(Blocks.RED_SAND) || blockstate.is(Blocks.COARSE_DIRT) || blockstate.is(ModBlocks.YUCCA_STEM.get());
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_51735_) {
@@ -83,7 +91,7 @@ public class YuccaStemBlock extends PipeBlock {
     }
 
 @Override
-    public boolean isPathfindable(BlockState p_51719_, BlockGetter p_51720_, BlockPos p_51721_, PathComputationType p_51722_) {
+    public boolean isPathfindable(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, PathComputationType computationType) {
         return false;
     }
 }

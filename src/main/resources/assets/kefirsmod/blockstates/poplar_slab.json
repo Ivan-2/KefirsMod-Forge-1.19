@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "kefirsmod:block/poplar_slab"
+    },
+    "type=double": {
+      "model": "kefirsmod:block/poplar_planks"
+    },
+    "type=top": {
+      "model": "kefirsmod:block/poplar_slab_top"
+    }
+  }
+}

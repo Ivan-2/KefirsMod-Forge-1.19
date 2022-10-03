@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "kefirsmod:fir_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "kefirsmod:fir_planks"
+  }
+}
