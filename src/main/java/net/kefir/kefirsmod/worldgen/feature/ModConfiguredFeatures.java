@@ -84,9 +84,9 @@ public class ModConfiguredFeatures {
     public static final Holder<ConfiguredFeature<TreeConfiguration, ?>> POPLAR_TREE =
             FeatureUtils.register("poplar", Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                     BlockStateProvider.simple(ModBlocks.POPLAR_LOG.get()),
-                    new ForkingTrunkPlacer(12, 2, 2),
+                    new ForkingTrunkPlacer(8, 1, 0),
                     BlockStateProvider.simple(ModBlocks.POPLAR_LEAVES.get()),
-                    new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(2), 12),
+                    new FancyFoliagePlacer(ConstantInt.of(1), ConstantInt.of(6), 10),
                     new TwoLayersFeatureSize(1, 1, 2)).build());
 
     public static final Holder<ConfiguredFeature<RandomFeatureConfiguration, ?>> BEECH_SPAWN =
